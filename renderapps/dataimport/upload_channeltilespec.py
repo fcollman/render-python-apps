@@ -22,13 +22,13 @@ class UploadChannelModule(RenderModule):
     def run(self):
         self.logger.error('NOT TESTED SPEAK TO FORREST IF WORKING OR NOT WORKING')
 
-        print mod.args
+        print(mod.args)
 
         str = self.args['inputDir']+"/"+self.args['channel'] + "*.json"
-        print str
+        print(str)
 
         jsonfiles = sorted(glob.glob(str))
-        print jsonfiles
+        print(jsonfiles)
         renderapi.stack.create_stack(self.args['outputStack'],render=self.render)
         renderapi.client.import_jsonfiles_parallel(self.args['outputStack'],jsonfiles,render=self.render)
 

@@ -93,7 +93,7 @@ def process_tile_pair_json_file(r,matchcollection,stack,owner,tile_pair_json_fil
                     isin[i]=False
             xx=xx[isin]
             yy=yy[isin]
-            #print 'step2', time.time()-now
+            #print('step2', time.time()-now)
             #now = time.time()
             xy = np.stack([xx,yy]).T
             if xy.shape[0]>0:
@@ -125,7 +125,7 @@ def process_tile_pair_json_file(r,matchcollection,stack,owner,tile_pair_json_fil
 #                isin[i]=False
 #        xx=xx[isin]
 #        yy=yy[isin]
-#        #print 'step2', time.time()-now
+#        #print('step2', time.time()-now)
 #        #now = time.time()
 #        xy = np.stack([xx,yy]).T
 
@@ -151,7 +151,7 @@ def process_tile_pair_json_file(r,matchcollection,stack,owner,tile_pair_json_fil
 #            pairs.append(newpair)
 
     resp=r.run(renderapi.pointmatch.import_matches,matchcollection,json.dumps(pairs))
-    print "Putting %d pairs in %s"%(len(pairs),matchcollection)
+    print("Putting %d pairs in %s"%(len(pairs),matchcollection))
 
 
 class CreateMontagePointMatch(RenderModule):
@@ -160,7 +160,7 @@ class CreateMontagePointMatch(RenderModule):
             schema_type = CreateMontagePointMatchParameters
         super(CreateMontagePointMatch,self).__init__(schema_type=schema_type,*args,**kwargs)
     def run(self):
-        print mod.args
+        print(mod.args)
 
         stack = self.args['stack']
         json_dir = os.path.join(self.args['dataRoot'],
@@ -185,8 +185,8 @@ class CreateMontagePointMatch(RenderModule):
         #    make_tile_part(z)
 
 
-        print "Done with tile pairs, now creating matches!"
-        print tile_pair_jsons
+        print("Done with tile pairs, now creating matches!")
+        print(tile_pair_jsons)
 
         myp = partial(process_tile_pair_json_file,
             self.render,
@@ -197,7 +197,7 @@ class CreateMontagePointMatch(RenderModule):
         with renderapi.client.WithPool(self.args['pool_size']) as pool:
             res=pool.map(myp,tile_pair_jsons)
         # for tile_pair in tile_pair_jsons:
-        #     print tile_pair
+        #     print(tile_pair)
         #     myp(tile_pair)
         #     break
 

@@ -18,7 +18,7 @@ class UploadTileSpecs(RenderModule):
         self.logger.error('NOT TESTED SPEAK TO FORREST IF WORKING OR NOT WORKING')
 
         jsonfiles = sorted(glob.glob(self.args['inputDir']+"*.json"))
-        print jsonfiles
+        print(jsonfiles)
 
         renderapi.stack.create_stack(self.args['outputStack'],render=self.render)
         renderapi.client.import_jsonfiles_parallel(self.args['outputStack'],jsonfiles,render=self.render)

@@ -35,7 +35,7 @@ def get_box_of_path(path):
     box = {}
     mins = np.min(path['orig_path'],axis=0)
     maxs = np.max(path['orig_path'],axis=0)
-    #print mins,maxs
+    #print(mins,maxs)
     box['minX']=mins[0]
     box['minY']=mins[1]
     box['maxX']=mins[0]
@@ -53,7 +53,7 @@ def make_plot(area_lists,overallbbox,subdir,dzs,ki):
     al = area_lists[k]
     #if volumes[k]>.1:
     f,ax = plt.subplots(1,1,figsize=(14,14))
-    #print bboxes[i]
+    #print(bboxes[i])
 
     if dzs[k]>10:
         c='r-x'
@@ -64,9 +64,9 @@ def make_plot(area_lists,overallbbox,subdir,dzs,ki):
         for path in area['paths']:
             poly = geometry.Polygon(path['orig_path'])
             x,y = poly.boundary.xy
-            #print poly
+            #print(poly)
             ax.plot(np.array(x),np.array(y)*-1,c,)
-    #print volumes[i]
+    #print(volumes[i])
     ax.set_title(al['oid']+' dz:%d'%dzs[k])
     ax.set_xlim([overallbbox['minX'],overallbbox['maxX']])
     ax.set_ylim([-overallbbox['maxY'],-overallbbox['minY']])
@@ -87,7 +87,7 @@ class MakeTrakEM2QCFigures(argschema.ArgSchemaParser):
             schema_type = MakeTrakEM2QCFiguresParameters
         super(MakeTrakEM2QCFigures,self).__init__(schema_type=schema_type,*args,**kwargs)
     def run(self):
-        print self.args
+        print(self.args)
         self.logger.error('WARNING NEEDS TO BE TESTED, TALK TO FORREST IF BROKEN')
         schema = AnnotationFile()
         with open(self.args['annotationFile'],'r') as fp:

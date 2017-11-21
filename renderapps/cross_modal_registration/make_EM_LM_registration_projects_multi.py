@@ -29,7 +29,7 @@ class makeEMLMRegistrationMultiProjects(RenderModule):
             schema_type = EMLMRegistrationMultiParameters
         super(makeEMLMRegistrationMultiProjects,self).__init__(schema_type=schema_type,*args,**kwargs)
     def run(self):
-        print self.args
+        print(self.args)
         
     
         #fill in missing bounds with the input stack bounds

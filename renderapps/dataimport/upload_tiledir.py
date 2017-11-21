@@ -39,7 +39,7 @@ def make_tilespec(tileDirectory,tilespecdir,outputProject,outputOwner,outputStac
     tilespecpaths = []
     tilespeclist = []
     for f in imagefiles:
-        #print f
+        #print(f)
         filepath=f
         sectionId="SEC%04d"%z
         tileId = "%04d"%z
@@ -96,7 +96,7 @@ class UploadTileDir(RenderModule):
 
         #tilespecpaths=[tilespecpaths[32]]
 
-        print tilespecpaths
+        print(tilespecpaths)
         #renderapi.stack.set_stack_state(outputStack,state="COMPLETE",render=self.render)
         renderapi.stack.create_stack(outputStack,owner=outputOwner,project=outputProject,verbose=False,render=self.render)
         self.logger.info(tilespecpaths)
@@ -104,6 +104,6 @@ class UploadTileDir(RenderModule):
         renderapi.client.import_tilespecs_parallel(outputStack,tilespeclist,render=self.render, poolsize=self.args['pool_size'])
 if __name__ == "__main__":
     #mod = CreateFastStack(schema_type = CreateFastStacksParameters)
-    #print example_input
+    #print(example_input)
     mod = UploadTileDir(input_data=example_input,schema_type=UploadTileDirParameters)
     mod.run()

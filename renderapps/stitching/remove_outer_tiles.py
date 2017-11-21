@@ -39,7 +39,7 @@ class RemoveOuterTiles(RenderModule):
             schema_type = RemoveOuterTilesParameters
         super(RemoveOuterTiles,self).__init__(schema_type=schema_type,*args,**kwargs)
     def run(self):
-        print self.args
+        print(self.args)
         self.logger.error('WARNING NEEDS TO BE TESTED, TALK TO FORREST IF BROKEN')
 
         #STEP 2: get z values of input stack

@@ -81,18 +81,18 @@ class SplitStack(RenderModule):
         scale = np.min([1.0,scale])
         level = np.int(np.ceil(np.log2(1/scale)))
         level_scale = 1.0/np.power(2,level)
-        print 'level',level
-        print 'level_scale',level_scale
+        print('level',level)
+        print('level_scale',level_scale)
         
         
         #scale=1.0
-        print 'scale',scale
-        print fov_height,fov_width
+        print('scale',scale)
+        print(fov_height,fov_width)
 
         x = np.arange(bounds['minX'],bounds['maxX'],fov_width)
         y = np.arange(bounds['minY'],bounds['maxY'],fov_height)
-        print x,y
-        print len(x),len(y),cols,rows
+        print(x,y)
+        print(len(x),len(y),cols,rows)
         xx,yy =  np.meshgrid(x,y)
         
         template = "http://{}:{}/render-ws/v1/owner/{}/project/{}/stack/{}/z/{}/box/{},{},{},{},{}/tiff-image?name=z{}.tif"
@@ -101,7 +101,7 @@ class SplitStack(RenderModule):
         for k,(xc,yc) in enumerate(zip(xx.ravel(),yy.ravel())):
             
                 i,j=np.unravel_index(k,(rows,cols))
-                #print i,k,xc,yc
+                #print(i,k,xc,yc)
                 tform1 = renderapi.transform.AffineModel(B0=-fov_width/2,
                                                          B1=fov_height/2,
                                                          labels=['middle_center'])
@@ -155,9 +155,9 @@ class SplitStack(RenderModule):
 
                     tilespecs.append(tilespec)
                 
-                #print json.dumps(tilespecs[0].to_dict(),indent=4)
+                #print(json.dumps(tilespecs[0].to_dict(),indent=4))
                 renderapi.stack.create_stack(outstack,render=self.render)
-                #print renderapi.utils.renderdumps(tilespecs,indent=4)
+                #print(renderapi.utils.renderdumps(tilespecs,indent=4))
                 renderapi.client.import_tilespecs(outstack,tilespecs, render=self.render)
                 renderapi.stack.set_stack_state(outstack,'COMPLETE',render=self.render)
  

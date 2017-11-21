@@ -41,7 +41,7 @@ def make_tilespec_from_statetable (df,rootdir,outputProject,outputOwner,outputSt
     mipmap_args = []
     tilespecpaths = []
     for ((ch,sess),chgroup) in df.groupby(['ch_name','session']):
-        print ch,sess
+        print(ch,sess)
 
         for ((rib,sect),group) in chgroup.groupby(['ribbon','section']):
             tilespeclist=[]
@@ -50,11 +50,11 @@ def make_tilespec_from_statetable (df,rootdir,outputProject,outputOwner,outputSt
                 filepath=row.full_path
                 fileparts=filepath.split(os.path.sep)[1:]
                 tilespecdir = rootdir + "/processed/downsamp_tilespec/"+fileparts[5]+"/"+fileparts[6]+"/"+fileparts[7]
-                #print tilespecdir
+                #print(tilespecdir)
                 if not os.path.isdir(tilespecdir):
                     os.makedirs(tilespecdir)
                 downdir = rootdir+"/processed/downsamp_images/"+fileparts[5]+"/"+fileparts[6]+"/"+fileparts[7]
-                #print "This is the Down Sampled Directory: %s"%downdir
+                #print("This is the Down Sampled Directory: %s"%downdir)
 
                 if not os.path.exists(downdir):
                     os.makedirs(downdir)
@@ -113,12 +113,12 @@ def create_mipmaps(inputImage,outputDirectory='.',mipmaplevels=[1,2,3],outputfor
         os.makedirs(outputDirectory)
 
     im = Image.open(inputImage)
-    #print 'origmode',im.mode
+    #print('origmode',im.mode)
     origsize = im.size
     table=[ i/256 for i in range(65536) ]
     im = im.convert('I')
     im = im.point(table,'L')
-    #print 'new mode',im.mode
+    #print('new mode',im.mode)
     inputFileName = os.path.split(inputImage)[1]
                    
     for level in mipmaplevels:
@@ -126,7 +126,7 @@ def create_mipmaps(inputImage,outputDirectory='.',mipmaplevels=[1,2,3],outputfor
         dwnImage = im.resize(newsize)
         outpath = os.path.join(outputDirectory,inputFileName[0:-4]+'_mip%02d.'%level+outputformat)
         dwnImage.save(outpath)
-        print outpath,level,newsize
+        print(outpath,level,newsize)
 
 
 
@@ -174,7 +174,7 @@ class CreateFastStack(RenderModule):
                     #project=outputProject,render=self.render)
                     renderapi.stack.create_stack(outputStack,owner=outputOwner, cycleNumber=1, cycleStepNumber=1,
                     project=outputProject,verbose=False,render=self.render)
-                    print k
+                    print(k)
                 self.logger.info(tilespecpaths)
                 renderapi.client.import_jsonfiles_parallel(outputStack,tilespecpaths,render=self.render)
                 

@@ -86,8 +86,8 @@ class ReImportTrakEM2ToRender(TrakEM2RenderModule):
                 for tso in tilespecs_original:
                     #tileid4 = "%04d"%(int(output_tilespecs[0].tileId))
                     #matches = [ts for ts in output_tilespecs if ts.tileId==tso.tileId]
-                    #print "This is tileid : ", tileid4
-                    #print tso.tileId
+                    #print("This is tileid : ", tileid4)
+                    #print(tso.tileId)
                     matches = [ts for ts in output_tilespecs if int(ts.tileId)==int(tso.tileId)]
                     if len(matches)>0:
                         tsm = matches[0]
@@ -104,7 +104,7 @@ class ReImportTrakEM2ToRender(TrakEM2RenderModule):
                 sv = renderapi.stack.get_stack_metadata(self.args['inputStack'],render=self.render)
                 renderapi.stack.create_stack(self.args['outputStack'],render=self.render)
                 renderapi.stack.set_stack_metadata(self.args['outputStack'],sv, render=self.render)
-                print outfile
+                print(outfile)
                 renderapi.client.import_jsonfiles_parallel(self.args['outputStack'],jsonfiles,render=self.render)
                 #renderapi.client.import_jsonfiles_parallel(self.args['outputStack'],[outfile],render=self.render)
                 #renderapi.stack.set_stack_state(self.args['inputStack'],"COMPLETE",render=self.render)

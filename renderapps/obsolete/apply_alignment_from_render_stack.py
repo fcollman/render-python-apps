@@ -16,14 +16,14 @@ def process_section(z,renderObj=None):
     #make a list of transform objects for its transforms, this takes this tile from raw space to aligned space
     tform_W_to_A = post_ts.tforms
 
-    #print 'origts',origts.tforms
+    #print('origts',origts.tforms)
     #invert the original transformations (assumes they are Affine)
     tform_W_to_R = origts.tforms
     tform_R_to_W = list(tform_W_to_R)
     tform_R_to_W.reverse()
     tform_R_to_W = [tf.invert() for tf in tform_R_to_W]
     
-    #print 'tform_R_to_W',tform_R_to_W
+    #print('tform_R_to_W',tform_R_to_W)
     #create a transform list that takes you from registered space to aligned space
     #this can now be appended to all the transforms in the original input stack
     #that share the same Z
@@ -111,7 +111,7 @@ if __name__ == '__main__':
 
     zvalues = render.get_z_values_for_stack(a.postalignedStack)
     
-    print 'processing %d sections'%len(zvalues)
+    print('processing %d sections'%len(zvalues))
     #SETUP a processing pool to process each section
     pool =mp.ProcessingPool(a.poolSize)
 

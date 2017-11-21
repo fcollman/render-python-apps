@@ -7,13 +7,13 @@ def create_mipmaps(inputImage,outputDirectory='.',mipmaplevels=[1,2,3],outputfor
         os.makedirs(outputDirectory)
 
     im = Image.open(inputImage)
-    #print 'origmode',im.mode
+    #print('origmode',im.mode)
     origsize = im.size
     if convertTo8bit:
         table=[ i/256 for i in range(65536) ]
         im = im.convert('I')
         im = im.point(table,'L')
-    #print 'new mode',im.mode
+    #print('new mode',im.mode)
     inputFileName = os.path.split(inputImage)[1]
                    
     for level in mipmaplevels:
@@ -21,7 +21,7 @@ def create_mipmaps(inputImage,outputDirectory='.',mipmaplevels=[1,2,3],outputfor
         dwnImage = im.resize(newsize)
         outpath = os.path.join(outputDirectory,inputFileName[0:-4]+'_mip%02d.'%level+outputformat)
         dwnImage.save(outpath)
-        print outpath,level,newsize
+        print(outpath,level,newsize)
 
         
 if __name__ == '__main__':
@@ -35,7 +35,7 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
     
-    print 'outdir',args.outputDirectory
+    print('outdir',args.outputDirectory)
     if args.outputDirectory is None:
         args.outputDirectory = os.path.split(args.inputImage)[0]
         if len(args.outputDirectory)==0:
@@ -47,12 +47,12 @@ if __name__ == '__main__':
 #         os.makedirs(args.outputDirectory)
 
 #     im = Image.open(args.inputImage)
-#     print 'origmode',im.mode
+#     print('origmode',im.mode)
 #     origsize = im.size
 #     table=[ i/256 for i in range(65536) ]
 #     im = im.convert('I')
 #     im = im.point(table,'L')
-#     print 'new mode',im.mode
+#     print('new mode',im.mode)
 #     inputFileName = os.path.split(args.inputImage)[1]
                    
 #     for level in args.mipmaplevels:
@@ -60,6 +60,6 @@ if __name__ == '__main__':
 #         dwnImage = im.resize(newsize)
 #         outpath = os.path.join(args.outputDirectory,inputFileName[0:-4]+'_mip%02d.'%level+args.outputformat)
 #         dwnImage.save(outpath)
-#         print outpath,level,newsize
+#         print(outpath,level,newsize)
         
     

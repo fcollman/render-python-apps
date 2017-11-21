@@ -45,7 +45,7 @@ def make_annotation_stack(render,annotation_dir,global_file,input_stack,annotati
 
     tilespecs = []
     for tileId,dft in tile_groups:
-        print tileId
+        print(tileId)
         ts=renderapi.tilespec.get_tile_spec(input_stack,tileId,render=render)
         ann_image = np.zeros((int(ts.width),int(ts.height)),dtype=np.uint8)
         for i,row in dft.iterrows():

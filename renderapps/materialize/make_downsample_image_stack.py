@@ -59,8 +59,8 @@ def process_z(render,stack,output_dir,scale,project,tagstr,Z):
           str(z)]
 
 
-    print args
-    print project
+    print(args)
+    print(project)
 
     #############render.run(renderapi.client.call_run_ws_client, 'org.janelia.render.client.RenderSectionClient', add_args = args)
 
@@ -80,17 +80,17 @@ def process_z(render,stack,output_dir,scale,project,tagstr,Z):
 
     #bb = renderapi.image.get_bb_image(stack, z, stackbounds['minX'], stackbounds['minY'], width, height, scale, render=render)
 
-    print "This is z: "
-    print z
-    print "These are stack bounds!"
-    print stackbounds
-    print "These are section bounds!"
-    print sectionbounds
+    print("This is z: ")
+    print(z)
+    print("These are stack bounds!")
+    print(stackbounds)
+    print("These are section bounds!")
+    print(sectionbounds)
 
 
     tilespecdir = os.path.join(output_dir,project,stack,'sections_at_%s'%str(scale),'tilespecs_%s'%tagstr)
     if os.path.exists(tilespecdir):
-		print "Path Exists!"
+		print("Path Exists!")
     else:
 		os.makedirs(tilespecdir)
 
@@ -126,7 +126,7 @@ def process_z(render,stack,output_dir,scale,project,tagstr,Z):
     t.from_dict(d)
     allts = [t]
     tilespecfilename = os.path.join(output_dir,project,stack,'sections_at_%s'%str(scale),'tilespecs_%s'%tagstr,'tilespec_%04d.json'%z)
-    print tilespecfilename
+    print(tilespecfilename)
     fp = open(tilespecfilename,'w')
     json.dump([ts.to_dict() for ts in allts] ,fp,indent=4)
     fp.close()
@@ -183,11 +183,11 @@ class MakeDownsampleSectionStack(RenderModule):
         for i in range(0,len(zvalues)):
 			Z.append( [zvalues[i], newzvalues[i]])
 
-        print self.args['input_stack']
-        print self.args['pool_size']
-        print self.args['image_directory']
-        print self.args['scale']
-        print newzvalues
+        print(self.args['input_stack'])
+        print(self.args['pool_size'])
+        print(self.args['image_directory'])
+        print(self.args['scale'])
+        print(newzvalues)
         #exit(0)
 
         render=self.render
@@ -203,7 +203,7 @@ class MakeDownsampleSectionStack(RenderModule):
         renderapi.stack.create_stack(self.args['output_stack'],cycleNumber=5,cycleStepNumber=1,stackResolutionX = 1, stackResolutionY = 1, render=self.render)
         renderapi.client.import_jsonfiles_parallel(self.args['output_stack'],jsonfiles,render=self.render)
         #sv = renderapi.stack.get_stack_metadata(self.args['input_stack'], render=self.render)
-        #print sv
+        #print(sv)
         #renderapi.stack.set_stack_metadata(self.args['output_stack'], sv, render=self.render)
         #renderapi.stack.set_stack_state(self.args['output_stack'],state='COMPLETE',render=self.render)
 

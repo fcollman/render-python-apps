@@ -116,7 +116,7 @@ def process_z(r,
         start_index = end_index
         # final_list.append(temp_list)
 
-    print "xy_world_reg"
+    print("xy_world_reg")
     # map all those local coordinates into world coordinates of the registered source stack
     xy_world_reg = r.run(renderapi.coordinate.local_to_world_coordinates_clientside,
                          input_stack_shared_space, final_list, z, number_of_threads=3)
@@ -126,12 +126,12 @@ def process_z(r,
     else:
         xy_world_source = xy_world_reg
 
-    print "xy_local_prealigned_json"
+    print("xy_local_prealigned_json")
     # map those world coordinates to the local coordinates of the prealigned stack
     xy_local_prealigned_json = r.run(
         renderapi.coordinate.world_to_local_coordinates_clientside, ref_stack_shared_space, xy_world_reg, z, number_of_threads=3)
 
-    print "xy_world_postaligned_json"
+    print("xy_world_postaligned_json")
     # map those local coordinates to the world coordinates of the postaligned stack
     xy_world_postaligned_json = r.run(renderapi.coordinate.local_to_world_coordinates_clientside,
                                       ref_stack_dest_space, xy_local_prealigned_json, z, number_of_threads=3)

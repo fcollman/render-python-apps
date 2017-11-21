@@ -58,18 +58,18 @@ class FilterEMModule(RenderModule):
 
         img = np.array(img,np.double)
         if (max_level==min_level):
-            print 'min_level',min_level
-            print 'max_level',max_level
-            print 'on file',path_in
+            print('min_level',min_level)
+            print('max_level',max_level)
+            print('on file',path_in)
             raise Exception("%s %f %f"%(path_in,min_level,max_level))
 
         img = ((img-min_level)/(max_level-min_level))*255
         img = (img - 128)*self.args['contrast_adjust'] + 128
-        #print 'img[2012,195]',img[2012,195]
+        #print('img[2012,195]',img[2012,195])
         img = np.clip(img,0,255)
-        #print 'img[2012,195]',img[2012,195]
+        #print('img[2012,195]',img[2012,195])
         img = np.array(img,np.uint8)
-        #print 'img[2012,195]',img[2012,195]
+        #print('img[2012,195]',img[2012,195])
 
         img = cv2.bilateralFilter(img,3,20,20)
         #clahe1 = cv2.createCLAHE(clipLimit=.5, tileGridSize=(10,10))
@@ -96,10 +96,10 @@ class FilterEMModule(RenderModule):
 
                 directory,old_file = os.path.split(old_path)
 
-                #print 'old_file',old_file
+                #print('old_file',old_file)
                 orig_tif = next(f for f in os.listdir(directory)
                     if ((old_file[0:-9] in f)) and ('flip' not in f) and ('mask' not in f) and (not f.endswith('bak0')))
-                #print 'orig_tif',orig_tif
+                #print('orig_tif',orig_tif)
                 orig_path = os.path.join(directory,orig_tif)
 
                 new_url = mml.imageUrl[0:-4]+'_flip.tif'

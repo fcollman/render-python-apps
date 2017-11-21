@@ -146,7 +146,7 @@ class ImportTrakEM2Annotations(TrakEM2RenderModule):
     default_output_schema = AnnotationFile
 
     def run(self):
-        print self.args
+        print(self.args)
         tem2file = self.args['trakem2project']
         trakem2dir = os.path.split(tem2file)[0]
         jsonFileOut = os.path.join(
@@ -185,7 +185,7 @@ class ImportTrakEM2Annotations(TrakEM2RenderModule):
         # get the area lists
         area_lists = root.findall('//t2_area_list')
         area_lists = [al for al in area_lists if (len(al.getchildren()) > 0)]
-        print 'project contains %d area lists' % len(area_lists)
+        print('project contains %d area lists' % len(area_lists))
 
         # parse the area lists into json
         json_output = parse_area_lists(

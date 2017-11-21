@@ -220,7 +220,7 @@ def define_connected_components_by_section(render,tilepairjson,match_numbers,min
     #f,ax = plt.subplots(figsize=(8,6))
     for i,sG in enumerate(subgraphs):
         zs = np.array([G.node[node]['z'] for node in sG])
-        print np.min(zs),'-',np.max(zs)
+        print(np.min(zs),'-',np.max(zs))
 
 class QCPointMatchResults(RenderModule):
     def __init__(self,schema_type=None,*args,**kwargs):

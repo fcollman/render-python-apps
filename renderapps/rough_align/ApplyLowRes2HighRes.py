@@ -59,12 +59,12 @@ def process_z(render,stack,lowres_stack,output_stack,prealigned_stack,output_dir
     z = Z[0]; newz = Z[1]
 
     try:
-		print "A"
+		print("A")
 		lowres_ts = renderapi.tilespec.get_tile_specs_from_z(lowres_stack,newz,render=render)
 		#highres_ts = renderapi.tilespec.get_tile_spec(stack,lowres_ts[0].tileId,render=render)
 		highres_ts = renderapi.tilespec.get_tile_specs_from_z(stack,z,render=render)[0]
 		tforms = lowres_ts[0].tforms
-		print "B"
+		print("B")
 		d = tforms[0].to_dict()
                 dsList = d['dataString'].split()
                 v0 = float(dsList[0])*scale
@@ -75,12 +75,12 @@ def process_z(render,stack,lowres_stack,output_stack,prealigned_stack,output_dir
                 v5 = float(dsList[5])
                 d['dataString'] = "%f %f %f %f %s %s"%(v0,v1,v2,v3, v4,v5)
                 tforms[0].from_dict(d)
-		print "C"
+		print("C")
 		stackbounds = renderapi.stack.get_bounds_from_z(stack,z,render=render)
                 prestackbounds = renderapi.stack.get_bounds_from_z(prealigned_stack,z,render=render)
                 tx =  int(stackbounds['minX']) - int(prestackbounds['minX'])
                 ty =  int(stackbounds['minY']) - int(prestackbounds['minY'])
-		print "D"
+		print("D")
 		tforms1 = highres_ts.tforms
                 d = tforms1[0].to_dict()
                 dsList = d['dataString'].split()
@@ -93,7 +93,7 @@ def process_z(render,stack,lowres_stack,output_stack,prealigned_stack,output_dir
                 d['dataString'] = "%f %f %f %f %s %s"%(v0,v1,v2,v3, v4,v5)
                 tforms1[0].from_dict(d)
 
-		print "E"
+		print("E")
 
 		#invert orig transformations
 		#tform_orig = highres_ts.tforms
@@ -103,30 +103,30 @@ def process_z(render,stack,lowres_stack,output_stack,prealigned_stack,output_dir
 		#final tform
 		#ftform = tform_orig_inv + tforms
 		ftform = tforms1 + tforms
-		print "F"
+		print("F")
 		allts = []
 		highres_ts1 = renderapi.tilespec.get_tile_specs_from_z(stack,z,render=render)
 
 		for t in highres_ts1:
-			print "f1"
+			print("f1")
 			t.tforms.append(ftform)
-			print "f2"
+			print("f2")
 			d1 = t.to_dict()
-			print "f3"
-			print d1['mipmapLevels'][0]['imageUrl']
+			print("f3")
+			print(d1['mipmapLevels'][0]['imageUrl'])
 			d1['z'] = newz
 			t.from_dict(d1)
 			allts.append(t)
-			print d1
-    		print "G"
+			print(d1)
+    		print("G")
 
 		tilespecfilename = os.path.join(output_dir,'tilespec_%04d.json'%newz)
-		print tilespecfilename
+		print(tilespecfilename)
 		fp = open(tilespecfilename,'w')
 		json.dump([ts.to_dict() for ts in allts] ,fp,indent=4)
 		fp.close()
     except:
-		print "This z has not been aligned!"
+		print("This z has not been aligned!")
 
 
 

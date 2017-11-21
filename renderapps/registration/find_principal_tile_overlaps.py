@@ -61,13 +61,13 @@ def find_tile_pair(render,stack,ts,ref_stack):
         frac_overlap = overlap.area/ts_geom.area
         overlap_tuples.append((ts2,frac_overlap))
     sorted_overlaps_tuples = sorted(overlap_tuples,key= lambda x: x[1])
-    #print ts.tileId,sorted_overlaps_tuples[0][1],sorted_overlaps_tuples[-1][1]
+    #print(ts.tileId,sorted_overlaps_tuples[0][1],sorted_overlaps_tuples[-1][1])
     ts2 = sorted_overlaps_tuples[-1][0]
     q = {}
     q['id']=ts2.tileId
     q['groupId']=ts2.layout.sectionId
     pair = {'p':p,'q':q}
-    #print sorted_overlaps_tuples,ts2.tileId,ts.tileId
+    #print(sorted_overlaps_tuples,ts2.tileId,ts.tileId)
     return pair
 
 def create_principal_overlap_tile_pair(render,stack,ref_stack,pool_size=20,queryParameters={}):

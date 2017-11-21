@@ -55,7 +55,7 @@ def fit_transforms_by_pointmatch(render,
                                  matchcollection,
                                  num_local_transforms,
                                  Transform):
-    print src_stack,dst_stack,matchcollection,num_local_transforms
+    print(src_stack,dst_stack,matchcollection,num_local_transforms)
     tilespecs_p = renderapi.tilespec.get_tile_specs_from_stack(src_stack, render=render)
     tilespecs_q = renderapi.tilespec.get_tile_specs_from_stack(dst_stack, render=render)
 
@@ -88,13 +88,13 @@ def fit_transforms_by_pointmatch(render,
             pass
         except StopIteration as e:
             pass
-        # print pid,qid
-        # print "p_pts"
-        # print p_pts
-        # print "dst_pts"
-        # print dst_pts
-        # print "p_pts_global"
-        # print p_pts_global
+        # print(pid,qid)
+        # print("p_pts")
+        # print(p_pts)
+        # print("dst_pts")
+        # print(dst_pts)
+        # print("p_pts_global")
+        # print(p_pts_global)
         # if k==1:
         #     break
 

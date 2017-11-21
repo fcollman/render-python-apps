@@ -40,11 +40,11 @@ class DeleteSection(RenderModule):
     def run(self):
 
 		allzvalues = self.render.run(renderapi.stack.get_z_values_for_stack,self.args['input_stack'])
-		print "Number of z values:"
+		print("Number of z values:")
 		a = np.array(allzvalues)
-		print a
-		print self.args['input_stack']
-		print self.args['section_z']
+		print(a)
+		print(self.args['input_stack'])
+		print(self.args['section_z'])
 		
 		renderapi.stack.set_stack_state(self.args['input_stack'], state='LOADING', render=self.render)
 		

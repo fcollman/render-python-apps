@@ -54,7 +54,7 @@ def process_z(stack,render,output_directory,Z):
 		ts.from_dict(t)
 
 	tilespecfilename = os.path.join(output_directory,'tilespec_%04d.json'%Z[1])
-	print tilespecfilename
+	print(tilespecfilename)
 	fp = open(tilespecfilename,'w')
 	json.dump([ts.to_dict() for ts in tilespecs] ,fp,indent=4)
 	fp.close()

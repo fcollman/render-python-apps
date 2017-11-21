@@ -4,7 +4,7 @@ import json
 from ij.process import FloatPolygon
 from ij.gui import PolygonRoi,Roi
 from ij.gui import WaitForUserDialog
-print 'start'
+print('start')
 exampledict = [{'bounds': {u'maxX': 11501.0,
   u'maxY': 34395.0,
   u'maxZ': 0.0,
@@ -32,7 +32,7 @@ for f in files:
     d=json.load(fp)
     fp.close()
 
-    print d['filepath']
+    print(d['filepath'])
     imp=IJ.openImage(d['filepath'])
     imp.show()
     coords = d['roi']['coordinates'][0]
@@ -43,10 +43,10 @@ for f in files:
     bound_height = d['bounds']['maxY']-d['bounds']['minY']
     
     scale = img_width*1.0/bound_width
-    print 'scale',scale
+    print('scale',scale)
     xvals = [(x-d['bounds']['minX'])*scale for x,y in coords[:-1]]
     yvals = [(y-d['bounds']['minY'])*scale  for x,y in coords[:-1]]
-    print xvals,yvals
+    print(xvals,yvals)
     fpoly = PolygonRoi(xvals,yvals,Roi.POLYGON)
     imp.setRoi(fpoly)
     
@@ -69,4 +69,4 @@ for f in files:
     fp = open(f,'w')
     json.dump(d,fp)
     fp.close()
-    print 'done!'
+    print('done!')

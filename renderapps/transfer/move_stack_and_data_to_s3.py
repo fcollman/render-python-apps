@@ -46,7 +46,7 @@ class MoveStackAndDataToS3(RenderTransfer):
             schema_type = MoveStackAndDataToS3Parameters
         super(MoveStackAndDataToS3,self).__init__(schema_type=schema_type,*args,**kwargs)
     def run(self):
-        print self.args
+        print(self.args)
         self.logger.error('WARNING NEEDS TO BE TESTED, TALK TO FORREST IF BROKEN')
 
         stack_move_params = dict(self.args)

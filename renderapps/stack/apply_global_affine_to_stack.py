@@ -105,7 +105,7 @@ class ApplyAffine(RenderModule):
         
         if (self.args['input_stack'] != output_stack):
             self.render.run(renderapi.stack.create_stack,output_stack)
-        print "made stack"
+        print("made stack")
         ds =",".join(global_tform.dataString.split(" "))
         renderapi.client.transformSectionClient(input_stack,
                                                 self.args['transformId'],
@@ -120,8 +120,8 @@ class ApplyAffine(RenderModule):
         renderapi.stack.set_stack_state(output_stack,'COMPLETE', render=self.render)
         #clean up the temp files
         #os.remove(tfile)
-        #print json.dumps(tforms,indent=2)
-        #print tfile
+        #print(json.dumps(tforms,indent=2))
+        #print(tfile)
 if __name__ == "__main__":
     mod = ApplyAffine(input_data= example_parameters)
     mod.run()

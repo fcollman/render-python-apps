@@ -1,5 +1,5 @@
 import os
-from create_mipmaps import create_mipmaps
+from .create_mipmaps import create_mipmaps
 import renderapi
 from renderapi.tilespec import MipMapLevel
 from functools import partial

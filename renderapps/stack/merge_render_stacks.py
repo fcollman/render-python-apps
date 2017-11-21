@@ -42,7 +42,7 @@ class MergeStacks(RenderModule):
             schema_type = MergeStacksParameters
         super(MergeStacks,self).__init__(schema_type=schema_type,*args,**kwargs)
     def run(self):
-        print self.args
+        print(self.args)
         self.logger.error('WARNING NEEDS TO BE TESTED, TALK TO FORREST IF BROKEN')
         #get the z values in the stack
         zvalues1 = self.render.run(renderapi.stack.get_z_values_for_stack,self.args['stack1'])
@@ -95,9 +95,9 @@ class MergeStacks(RenderModule):
         #get the filepaths of json files in parallel
         #json_files = []
         #for z in zvalues:
-        #    print z
+        #    print(z)
         #    json_files.append(mypartial(z))
-        #print json_files
+        #print(json_files)
         with renderapi.client.WithPool(self.args['pool_size']) as pool:
             json_files = pool.map(mypartial,zvalues)
         #import the json_files into the output stack

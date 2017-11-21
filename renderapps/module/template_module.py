@@ -30,7 +30,7 @@ class Template(RenderModule):
             schema_type = TemplateParameters
         super(Template,self).__init__(schema_type=schema_type,*args,**kwargs)
     def run(self):
-        print self.args
+        print(self.args)
         self.logger.error('WARNING NEEDS TO BE TESTED, TALK TO FORREST IF BROKEN')
 
 

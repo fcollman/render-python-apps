@@ -72,8 +72,8 @@ class CreateTrakEM2Project(RenderModule):
             #add layers
 
             for layerid in range(x.first, x.last+1):
-                print "This is layerid:"
-                print layerid
+                print("This is layerid:")
+                print(layerid)
                 tilespecs = renderapi.tilespec.get_tile_specs_from_minmax_box(
                         self.args['inputStack'],
                         layerid,
@@ -82,11 +82,11 @@ class CreateTrakEM2Project(RenderModule):
                         self.args['minY'],
                         self.args['maxY'],
                         render=self.render)
-                print "Now adding layer: %d \n %d tiles"%(layerid,len(tilespecs))
+                print("Now adding layer: %d \n %d tiles"%(layerid,len(tilespecs)))
                 createlayer_fromtilespecs(tilespecs, outfile,layerid,shiftx=-self.args['minX'],shifty=-self.args['minY'])
 
             #footers
-            print outfile
+            print(outfile)
             createfooters(outfile)
 
 if __name__ == "__main__":

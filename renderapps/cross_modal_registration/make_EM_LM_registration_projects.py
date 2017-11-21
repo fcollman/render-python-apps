@@ -49,7 +49,7 @@ class makeEMLMRegistrationProjects(RenderModule):
             schema_type = EMLMRegistrationParameters
         super(makeEMLMRegistrationProjects,self).__init__(schema_type=schema_type,*args,**kwargs)
     def run(self):
-        print self.args
+        print(self.args)
         self.logger.error('WARNING NEEDS TO BE TESTED, TALK TO FORREST IF BROKEN')
     
         #fill in missing bounds with the input stack bounds

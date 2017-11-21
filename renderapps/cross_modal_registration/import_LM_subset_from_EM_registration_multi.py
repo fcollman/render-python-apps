@@ -42,7 +42,7 @@ class ImportLMSubsetFromEMRegistrationMultiProjects(TrakEM2RenderModule):
         super(ImportLMSubsetFromEMRegistrationMultiProjects,self).__init__(schema_type=schema_type,*args,**kwargs)
 
     def run(self):
-        print mod.args
+        print(mod.args)
         if not os.path.isdir(self.args['outputXMLdir']):
             os.makedirs(self.args['outputXMLdir'])
         xmlDir = self.args['outputXMLdir']
@@ -71,7 +71,7 @@ class ImportLMSubsetFromEMRegistrationMultiProjects(TrakEM2RenderModule):
             for ts in newtilespecs:
                 try:
                     nts = next(t for t in LMtilespecs if t.tileId == ts.tileId )
-                    print nts.tileId
+                    print(nts.tileId)
                     LMtilespecssubset.append(nts)
                 except:
                     pass

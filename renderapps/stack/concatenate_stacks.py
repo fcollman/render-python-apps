@@ -55,17 +55,17 @@ class ConcatenateStacksParameters(RenderParameters):
 	
     
 def process_z(stack,project,render,output_directory,z):
-	print z
+	print(z)
 	tilespecs = renderapi.tilespec.get_tile_specs_from_z(stack,z,render=render,project=project)
 	tilespecfilename = os.path.join(output_directory,'tilespec_%04d.json'%z)
-	print tilespecfilename
+	print(tilespecfilename)
 	fp = open(tilespecfilename,'w')
 	json.dump([ts.to_dict() for ts in tilespecs] ,fp,indent=4)
 	fp.close()
     
 
 def process_z_adjust(stack,project,render,output_directory,Z):
-	print Z[0]
+	print(Z[0])
 	tilespecs = renderapi.tilespec.get_tile_specs_from_z(stack,Z[0],render=render,project=project)
 
 	for ts in tilespecs:
@@ -74,7 +74,7 @@ def process_z_adjust(stack,project,render,output_directory,Z):
 		ts.from_dict(d)
 
 	tilespecfilename = os.path.join(output_directory,'tilespec_%04d.json'%Z[1])
-	print tilespecfilename
+	print(tilespecfilename)
 	fp = open(tilespecfilename,'w')
 	json.dump([ts.to_dict() for ts in tilespecs] ,fp,indent=4)
 	fp.close()
@@ -94,7 +94,7 @@ class ConcatenateStacks(RenderModule):
 		if not os.path.exists(self.args['output_directory']):
 			os.mkdir(self.args['output_directory'])
 		for i in range(0,len(i_st)):
-			print i
+			print(i)
 			outstack = self.args['output_stack']+str(i)
 			outproject = self.args['output_project']
 			self.render.run(renderapi.stack.clone_stack,i_st[i],outstack,toProject=outproject,project=i_pr[i])  
@@ -117,7 +117,7 @@ class ConcatenateStacks(RenderModule):
 				with renderapi.client.WithPool(self.args['pool_size']) as pool:
 					pool.map(mypartial,z)
 
-		print self.args['adjust_z']
+		print(self.args['adjust_z'])
 		outstack = self.args['output_stack']
 		jsonfiles = glob.glob("%s/*.json"%self.args['output_directory'])    
         	renderapi.stack.create_stack(outstack,render=self.render,cycleNumber=10,cycleStepNumber=1,project=outproject)

@@ -16,13 +16,13 @@ def convert(value, numofdigits):
 	strval = str(value)
 	lenstr = len(strval)
 	if lenstr > numofdigits:
-		print ("Cannot create a string smaller than needed")
+		print(("Cannot create a string smaller than needed"))
 		exit(0)
 		
 	else:
 		prefix = "0"*(numofdigits - lenstr)
 		strval = prefix+strval
-	#print strval
+	#print(strval)
 	return strval
 
 if __name__ == '__main__':
@@ -44,15 +44,15 @@ if __name__ == '__main__':
     firstz = args.firstz[0]
     lastz = args.lastz[0]
 
-    print inputStack
-    print scale
+    print(inputStack)
+    print(scale)
    
 
     if not os.path.isdir(outputDirectory):
 	    os.makedirs(outputDirectory)
 
     z = firstz
-    print z
+    print(z)
     while z <= lastz:
 
         a = z
@@ -63,7 +63,7 @@ if __name__ == '__main__':
 	#request_url = request_url+"project/M270907_Scnn1aTg2Tdt_13/stack/%s/z/%s/box/0,0,15000,35000,%s/jpeg-image"%(inputStack,str(z),scale)
 	request_url = request_url+"project/M270907_Scnn1aTg2Tdt_13/stack/%s/z/%s/jpeg-image?scale=%s"%(inputStack,str(z),scale)
 
-        print (request_url)
+        print((request_url))
         session = requests.session()
         r = session.get(request_url)
         try:
@@ -72,7 +72,7 @@ if __name__ == '__main__':
 		
         except:
             print("Did not work!")
-        #print (request_url)
+        #print((request_url))
 
 	#boxparams=[1200,2000,4000,8600]
 	#img = renderapi.get_image_data(inputStack,z,boxparams,scale)

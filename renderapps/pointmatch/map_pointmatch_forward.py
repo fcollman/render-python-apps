@@ -74,7 +74,7 @@ def map_point_matches_forward(render,
     tilespecs = render.run(renderapi.tilespec.get_tile_specs_from_stack, stack)
     pgroups = render.run(renderapi.pointmatch.get_match_groupIds_from_only, src_matchcollection)
     for psection in pgroups:
-        print psection
+        print(psection)
         process_group(render,
                       tilespecs,
                       psection,

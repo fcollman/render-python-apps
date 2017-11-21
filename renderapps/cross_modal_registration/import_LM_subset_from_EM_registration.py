@@ -36,7 +36,7 @@ class ImportEMRegistrationProjects(TrakEM2RenderModule):
         super(ImportEMRegistrationProjects,self).__init__(schema_type=schema_type,*args,**kwargs)
 
     def run(self):
-        print mod.args
+        print(mod.args)
         self.logger.error('WARNING NEEDS TO BE TESTED, TALK TO FORREST IF BROKEN')
         if not os.path.isdir(self.args['outputXMLdir']):
             os.makedirs(self.args['outputXMLdir'])

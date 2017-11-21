@@ -77,7 +77,7 @@ if __name__ == '__main__':
     project_path = mod.args['project_path']
     project_dir, project_file = os.path.split(project_path)
     project_base = os.path.splitext(project_file)[0]
-    print project_base, project_dir
+    print(project_base, project_dir)
     with open(project_path) as fd:
         doc = xmltodict.parse(fd.read())
     project = doc['F-BioSEM-Project']['BioSemProject']
@@ -103,7 +103,7 @@ if __name__ == '__main__':
     # coordinate system of the
     for siteset in sitesets:
         if siteset['Name'] == mod.args['site_name']:
-            print 'in', siteset['Name']
+            print('in', siteset['Name'])
             json_files = process_siteset(mod.render,
                                          siteset,
                                          sectionset,
@@ -118,7 +118,7 @@ if __name__ == '__main__':
     if mod.args['make_tiles']:
         for siteset in sitesets:
             if siteset['Name'] == mod.args['site_name']:
-                print 'in', siteset['Name']
+                print('in', siteset['Name'])
                 # uncomment to make masks and flipped images
                 make_tile_masks(siteset, sectionset, project, project_path)
 

@@ -48,7 +48,7 @@ class Diffz(RenderModule):
         c = set(zvalues1).union(set(zvalues2))
         d = set(zvalues1).intersection(set(zvalues2))
         
-        print list(c-d)
+        print(list(c-d))
         
        
         

@@ -55,12 +55,12 @@ def createlayer(jsonfile, outfile, layerid):
     #Ntiles = len(tilespecs['tileSpecs'])
     Ntiles = len(tilespecs)
 
-    print "This is the number of tiles:"
-    print Ntiles
+    print("This is the number of tiles:")
+    print(Ntiles)
 
     y = 0
     while patchid < Ntiles:
-    #print patchid
+    #print(patchid)
         createpatch(tilespecs, lines, patchid,layerid)
         patchid = patchid + 1
 
@@ -86,12 +86,12 @@ def createlayer_fromtilespecs(tilespecs, outfile, layerid,shiftx=0.0,shifty=0.0,
     #Ntiles = len(tilespecs['tileSpecs'])
     Ntiles = len(tilespecs)
 
-    #print "This is the number of tiles:"
-    #print Ntiles
+    #print("This is the number of tiles:")
+    #print(Ntiles)
 
     y = 0
     while patchid < Ntiles:
-    #print patchid
+    #print(patchid)
         createpatch(tilespecs, lines, patchid,layerid,shiftx=shiftx,shifty=shifty,affineOnly=affineOnly)
         patchid = patchid + 1
 
@@ -107,7 +107,7 @@ def createpatch(tilespecs, lines, patchid,layerid,shiftx=0.0,shifty=0.0,affineOn
     import numpy as np
     ts = tilespecs[patchid]
     #fp = tilespecs[patchid]['mipmapLevels']['0']['imageUrl']
-    #print fp
+    #print(fp)
     #fp = fp.replace("raw/data","processed/flatfieldcorrecteddata")
     #fp = fp.replace("session","Session000")
     fp = ts.ip.get(0)['imageUrl']
@@ -116,7 +116,7 @@ def createpatch(tilespecs, lines, patchid,layerid,shiftx=0.0,shifty=0.0,affineOn
     #lenspeclist = len(tilespecs[patchid]['transforms']['specList'])
     lenspeclist = len(ts.tforms)
     #tString = tilespecs[patchid]['transforms']['specList'][lenspeclist-1]['dataString']
-    #print tilespecs[patchid].tforms[lenspeclist-1]
+    #print(tilespecs[patchid].tforms[lenspeclist-1])
 
     if affineOnly:
         tform_total = AffineModel()
@@ -217,7 +217,7 @@ def createfooters(outfile):
     lines.append("\t</trakem2>\n")
 
     with open(outfile, "a") as f1:
-        #print lines
+        #print(lines)
         f1.writelines(lines)
 
 class Chunk:
@@ -227,7 +227,7 @@ class Chunk:
 
 def createchunks(firstSection,lastSection,sectionsPerChunk):
     if sectionsPerChunk % 2 > 0:
-        print "Please Input an even number of sections per chunk!"
+        print("Please Input an even number of sections per chunk!")
         exit(0)
 
     allchunks = []

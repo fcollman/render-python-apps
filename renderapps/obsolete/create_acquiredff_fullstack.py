@@ -52,11 +52,11 @@ if __name__ == '__main__':
     for x in range(args.firstStatetableNum[0], args.lastStatetableNum[0]+1):
         statetablefiles.append(rootdir+"/scripts_ff/statetable_"+num2str(x,4))
 
-    print statetablefiles
+    print(statetablefiles)
 
     dflist = []
     for i in range(0,len(statetablefiles)):
-	print statetablefiles[i]
+	print(statetablefiles[i])
         df_temp = pd.read_csv(statetablefiles[i])
         dflist.append(df_temp)
 
@@ -76,10 +76,10 @@ if __name__ == '__main__':
     project = '%s'%os.path.split(rootdir)[1]
     project_params = ['--baseDataUrl',baseurl,'--owner',owner,'--project',project]
 
-    print len(df)
+    print(len(df))
 
     for ((ch,sess),group) in df.groupby(['ch_name','session']):
-        #print sess
+        #print(sess)
 
         #if (1 == 1):
         if (ch == "DAPI_1"):
@@ -92,21 +92,21 @@ if __name__ == '__main__':
 
             proc=subprocess.Popen(cmd,env=my_env,stdout=subprocess.PIPE)
             proc.wait()
-            print "created stack",stackstr
+            print("created stack",stackstr)
 
 
 
             for ((rib,sect),g2) in group.groupby(['ribbon','section']):
-                print "rib = %s, sect = %s"%(str(rib),str(sect))
+                print("rib = %s, sect = %s"%(str(rib),str(sect)))
                 if (rib > -1 ):
                 #if (rib == 0) & (sect == 0):
                     json_file=os.path.join(stitched_tilespec_dir,'%s_rib%04dsess%04dsect%04d.json'%(ch,rib,sess,sect))
 		    if (args.updateZval):
-			print "Updating z value for %s!"%json_file
+			print("Updating z value for %s!"%json_file)
 		    	updatejsonfilewithz(json_file,ch,rib,sess,sect,ff_tilespec_dir)
                     tform_file = os.path.join(stitched_transform_tilespec_dir,'rib%04dsess%04dsect%04d.json'%(rib,sess,sect))
-                    print json_file
-                    print tform_file
+                    print(json_file)
+                    print(tform_file)
 
                     cmd=[os.path.join(client_scripts,'import_json.sh')]+ \
                         project_params +\
@@ -126,6 +126,6 @@ if __name__ == '__main__':
                  '--stackState','COMPLETE']
             proc=subprocess.Popen(cmd,env=my_env,stdout=subprocess.PIPE)
             proc.wait()
-            print "completed stack",stackstr
+            print("completed stack",stackstr)
             url = baseurl + '/owner/' + owner + '/project/' + project + '/stack/' + stackstr + '/z/0/png-image?scale=.2'
-            print 'example URL',url
+            print('example URL',url)

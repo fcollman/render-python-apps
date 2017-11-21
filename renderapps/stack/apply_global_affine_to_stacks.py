@@ -55,7 +55,7 @@ class ApplyAffineMultiple(RenderModule):
             del params['input_stacks']
             del params['output_prefix']
             del params['input_json']
-            print params['input_stack']
+            print(params['input_stack'])
             mod=ApplyAffine(input_data = params,args=[])
             mod.run()
 

@@ -36,7 +36,7 @@ class ImportEMRegistrationMultiProjects(TrakEM2RenderModule):
         super(ImportEMRegistrationMultiProjects,self).__init__(schema_type=schema_type,*args,**kwargs)
 
     def run(self):
-        print mod.args
+        print(mod.args)
         if not os.path.isdir(self.args['outputXMLdir']):
             os.makedirs(self.args['outputXMLdir'])
         xmlDir = self.args['outputXMLdir']

@@ -59,13 +59,13 @@ def process_match(r,output_matchcollection,default_collection,ref_channel,match)
 	
 	def_match = renderapi.pointmatch.get_matches_from_tile_to_tile(default_collection, match['pGroupId'], match['pId'], match['qGroupId'], match['qId'], render=r)
 	
-	print match
+	print(match)
 	
 	if len(def_match)> 0:
 	
 		dmatch = def_match[0]
 		
-		print match['matches']['p'][0]
+		print(match['matches']['p'][0])
 		
 		match['matches']['p'][0] = match['matches']['p'][0] + dmatch['matches']['p'][0]
 		match['matches']['p'][1] = match['matches']['p'][1] + dmatch['matches']['p'][1]
@@ -73,9 +73,9 @@ def process_match(r,output_matchcollection,default_collection,ref_channel,match)
 		match['matches']['q'][1] = match['matches']['q'][1] + dmatch['matches']['q'][1]
 		match['matches']['w'][0] = match['matches']['w'][0] + dmatch['matches']['w'][0]
 		
-		print dmatch['matches']['p'][0]
-		print match['matches']['p'][0]
-		#print len(def_match)
+		print(dmatch['matches']['p'][0])
+		print(match['matches']['p'][0])
+		#print(len(def_match))
 		
 		
 	pairs.append(match)
@@ -102,15 +102,15 @@ class ConsolidatePointMatchesAcrossChannels(RenderModule):
 			default_collection = inputs[i]
 			for j in range(1,len(inputs)):
 				if (i == j):
-					print "i == j"
+					print("i == j")
 				else:
 					col = inputs[j]
 					groups = renderapi.pointmatch.get_match_groupIds(col,render=self.render)
-					print col
-					print len(groups)
+					print(col)
+					print(len(groups))
 					for j in range(0,len(groups)):
-						print col
-						print groups[j]
+						print(col)
+						print(groups[j])
 						matches.append(renderapi.pointmatch.get_matches_with_group(col,groups[j],render=self.render))
 
 					matches = reduce(operator.concat,matches)
@@ -126,7 +126,7 @@ class ConsolidatePointMatchesAcrossChannels(RenderModule):
 						matcharray.append(pool.map(mypartial,matches))
         
         
-		#print output_collection
+		#print(output_collection)
         
         
         

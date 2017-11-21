@@ -63,7 +63,7 @@ class AtlasTransform():
         self.M[1, 1] = cvm[1, 1]
         self.M[0, 3] = cvm[0, 2]
         self.M[1, 3] = cvm[1, 2]
-        # print self.M
+        # print(self.M)
 
     def convert_to_point_vector(self, points):
         Np = points.shape[0]
@@ -147,7 +147,7 @@ def make_tile_masks(siteset, sectionset, project, project_path):
     ods = [ods for ods, p in zip(nodes, paths) if 'OrderedDataSet' in p]
 
     if len(ods) > 0:
-        # print "found it"
+        # print("found it")
         ods = ods[0]
 
         outdir = os.path.join(os.path.join(
@@ -158,7 +158,7 @@ def make_tile_masks(siteset, sectionset, project, project_path):
         for site in siteset['Site']:
             sitefile = os.path.join(
                 outdir, site['Name'].replace(' ', '') + '.csv')
-            # print sitefile
+            # print(sitefile)
 
             section = [section for section in sectionset['Section']
                 if section['UID'] == site['LinkedToUID']][0]
@@ -175,7 +175,7 @@ def make_tile_masks(siteset, sectionset, project, project_path):
 
             relpath = mosaic['FileName'][mosaic['FileName'].find(
                 project_base):]
-            # print relpath
+            # print(relpath)
             unixpath = relpath.replace('\\', '/')
             unixpath = os.path.join(project_dir, unixpath)
             basedir = os.path.split(unixpath)[0]
@@ -197,9 +197,9 @@ def make_tile_masks(siteset, sectionset, project, project_path):
                     '-compress', 'LZW', '-depth', '8', '-flip', maskpath]
                 flipcmd = ['convert', path, '-depth', '8', '-flip',
                     '-quality', '85', '-negate', flippath]
-                # print path
-                # print maskpath
-                # print cmd
+                # print(path)
+                # print(maskpath)
+                # print(cmd)
                 cmds.append(maskcmd)
                 cmds.append(flipcmd)
 
@@ -213,7 +213,7 @@ def make_tile_masks(siteset, sectionset, project, project_path):
                 for p in filter(None, processes):
                     p.wait()
             # for tile in mosaicdoc['Tiles']['Tile']:
-            #    print tile['UID'],tile['@row'],tile['@col'],tile['StageX'],tile['StageY']
+            #    print(tile['UID'],tile['@row'],tile['@col'],tile['StageX'],tile['StageY'])
             # df.to_csv(sitefile,index=False,header=False)
 
 def process_siteset(render,siteset, sectionset, doc, project_path,lm_dataset='test',lm_stack='ACQDAPI_1'):
@@ -239,7 +239,7 @@ def process_siteset(render,siteset, sectionset, doc, project_path,lm_dataset='te
     sitename=siteset['Name'].replace(' ', '')
     json_files = []
     if len(ods) > 0:
-        # print "found it"
+        # print("found it")
         ods=ods[0]
 
         outdir=os.path.join(os.path.join(project_dir, 'TEM2_import_files'))
@@ -249,7 +249,7 @@ def process_siteset(render,siteset, sectionset, doc, project_path,lm_dataset='te
         for site in siteset['Site']:
             sitefile=os.path.join(
                 outdir, site['Name'].replace(' ', '') + '.csv')
-            # print sitefile
+            # print(sitefile)
             df=pd.DataFrame(columns=('Path', 'M00', 'M01',
                             'M10', 'M11', 'dx', 'dy'))
 
@@ -266,7 +266,7 @@ def process_siteset(render,siteset, sectionset, doc, project_path,lm_dataset='te
                 continue
             else:
                 mosaic=mosaic[0]
-            # print mosaic['Name']
+            # print(mosaic['Name'])
             # this is the transform that describes how to transform from the coodinate system of the EM stage
             # to the new coordiante transform of this mosaic site
             mt=AtlasTransform(mosaic['ParentTransform'])
@@ -275,19 +275,19 @@ def process_siteset(render,siteset, sectionset, doc, project_path,lm_dataset='te
             center_stage=mt.tform(center)
             # these are now the light microscopy stage coordinates that correspond with this site
             lm_coords=at.inverse_tform(center_stage)
-            # print mt
-            # print 'center_stage',center_stage
-            # print 'lm coords',lm_coords
-            # print 'at',at
+            # print(mt)
+            # print('center_stage',center_stage)
+            # print('lm coords',lm_coords)
+            # print('at',at)
 
-            # print site['AcquisitionSpec'].keys()
+            # print(site['AcquisitionSpec'].keys())
             pid=site['AcquisitionSpec']['WorkingProtocolUID']
             pixsize, width, height=get_protocol_metadata(pid, project)
-            # print site['Name'],',',section['Name'],',',siteset['Name'],',',mosaic['Name']
-            # print site['AcquisitionSpec']['AcquiredDataUID']
+            # print(site['Name'],',',section['Name'],',',siteset['Name'],',',mosaic['Name'])
+            # print(site['AcquisitionSpec']['AcquiredDataUID'])
             relpath=mosaic['FileName'][mosaic['FileName'].find(
                 project_base):]
-            # print relpath
+            # print(relpath)
             unixpath=relpath.replace('\\', '/')
             unixpath=os.path.join(project_dir, unixpath)
             basedir=os.path.split(unixpath)[0]
@@ -299,7 +299,7 @@ def process_siteset(render,siteset, sectionset, doc, project_path,lm_dataset='te
             if type(mosaicdoc['Tile']) is not type([]):
                 mosaicdoc['Tile']=[mosaicdoc['Tile']]
             sectnum=int(section['SectionIndex'])
-            #print 'section number',sectnum
+            #print('section number',sectnum)
             sectionId='%d' % (1000 * ribnum + sectnum)
             sectionZ=renderapi.stack.get_section_z_value(
                 lm_stack, sectionId, render=render)
@@ -307,13 +307,13 @@ def process_siteset(render,siteset, sectionset, doc, project_path,lm_dataset='te
                 lm_stack, sectionZ, render=render)
             LMtile_xy=np.array(
                 [[ts.layout.stageX, ts.layout.stageY] for ts in tilespecs])
-            #print 'sectionZ',sectionZ
+            #print('sectionZ',sectionZ)
 
             image_corners=np.array([[0, 0], [0, 1], [1, 0], [1, 1]])
-            # print "at"
-            # print at
-            # print "mt"
-            # print mt
+            # print("at")
+            # print(at)
+            # print("mt")
+            # print(mt)
             tilespeclist=[]
             for i, tile in enumerate(mosaicdoc['Tile']):
                 distances=np.zeros(len(tilespecs))
@@ -330,16 +330,16 @@ def process_siteset(render,siteset, sectionset, doc, project_path,lm_dataset='te
                     id_at.inverse_tform(mt.tform(tform.tform(image_corners) + shift)))
                 # EMtile_corners_lm_stage[:,1]+=(2048*.107)
                 # EMtile_corners_lm_stage[:,1]*=-1
-                #print "EMtile_corners_lm_stage",EMtile_corners_lm_stage
+                #print("EMtile_corners_lm_stage",EMtile_corners_lm_stage)
 
                 # tranform the EM tile through the transforms to get LM stage coordinates of center
-                # print tform
+                # print(tform)
                 EMtile_center_lm_stage=at.inverse_tform(
                     id_at.inverse_tform(mt.tform(tform.tform(center) + shift)))
                 # EMtile_center_lm_stage[:,1]+=(2048*.107)
-                #print 'EMtile_center_lm_stage',EMtile_center_lm_stage
+                #print('EMtile_center_lm_stage',EMtile_center_lm_stage)
                 # EMtile_center_lm_stage[:,1]*=-1
-                # print [(ts['layout']['stageX']-tile_lm_stage[0,0])**2+(ts['layout']['stageY']+tile_lm_stage[0,1])**2 for ts in tilespecs]
+                # print([(ts['layout']['stageX']-tile_lm_stage[0,0])**2+(ts['layout']['stageY']+tile_lm_stage[0,1])**2 for ts in tilespecs])
                 # EMtile_xy = np.array([tile_lm_stage[0,0],-tile_lm_stage[0,1]])
 
                 # figure out which of the LM tiles is closest to this EM tile in terms of stage coordinates
@@ -351,8 +351,8 @@ def process_siteset(render,siteset, sectionset, doc, project_path,lm_dataset='te
                 LMtile_i=np.argmin(d)  # pick out the index of the smallest
                 # this is the tilespec of the closest tile
                 close_spec=tilespecs[LMtile_i]
-                # print 'tile ',LMtile_i,'id',close_spec['tileId'], 'closest at ','%4.2f'%d[LMtile_i],' um'
-                #print close_spec.tileId
+                # print('tile ',LMtile_i,'id',close_spec['tileId'], 'closest at ','%4.2f'%d[LMtile_i],' um')
+                #print(close_spec.tileId)
 
                 # this calculates the delta from the EM stage coordinates to the LM stage coordinates
                 # and divides by the size of LM pixels, to get delta in pixels from the center of the LM tile
@@ -376,10 +376,10 @@ def process_siteset(render,siteset, sectionset, doc, project_path,lm_dataset='te
                 # use renderapi to map these local pixel coordinates to the global space
                 EMtile_corners_world_coords=renderapi.transform.estimate_dstpts(close_spec.tforms,EMtile_corners_local_pixels)
                 EMtile_center_world_coords=renderapi.transform.estimate_dstpts(close_spec.tforms,EMtile_center_local_pixels)
-                #print lm_stack
-                #print "localmap",renderapi.transform.estimate_dstpts(close_spec.tforms,EMtile_center_local_pixels)
-                #print "EMtile_center_local_pixels",EMtile_center_local_pixels
-                #print "EMtile_center_world_coords",EMtile_center_world_coords
+                #print(lm_stack)
+                #print("localmap",renderapi.transform.estimate_dstpts(close_spec.tforms,EMtile_center_local_pixels))
+                #print("EMtile_center_local_pixels",EMtile_center_local_pixels)
+                #print("EMtile_center_world_coords",EMtile_center_world_coords)
 
                 # these are the local coordinates of the corners of the EM tile
                 # listed in the same order as the "corners" variable, but noting
@@ -392,15 +392,15 @@ def process_siteset(render,siteset, sectionset, doc, project_path,lm_dataset='te
                                             float(tile['Height'])],
                                     [float(tile['Width']), 0]
                                 ])
-                # print "from\n",EMpixel_corners
-                # print "to\n",EMtile_corners_world_coords
+                # print("from\n",EMpixel_corners)
+                # print("to\n",EMtile_corners_world_coords)
                 emtform=cv2.getAffineTransform(np.float32(
                     EMpixel_corners[0:3, :]), np.float32(EMtile_corners_world_coords[0:3, :]))
                 atlas_emt=AtlasTransform()
                 atlas_emt.load_from_openCV(emtform)
-                # print atlas_emt.tform(np.array([[0,0],[5000,5000],[0,5000],[5000,0]]))
+                # print(atlas_emt.tform(np.array([[0,0],[5000,5000],[0,5000],[5000,0]])))
                 s=np.sqrt(-np.linalg.det(atlas_emt.M[0:2, 0:2]))
-                # print atlas_emt.M[0:2,0:2]/s
+                # print(atlas_emt.M[0:2,0:2]/s)
 
                 row, col=tile['Name'].split('_')[1].split('-')
                 row=int(row[1:])
@@ -451,9 +451,9 @@ def process_siteset(render,siteset, sectionset, doc, project_path,lm_dataset='te
                 tilespeclist.append(tilespec)
                 # row= (str(path),) + tform.to_tuple()
                 # df.loc[i]=row
-                # print tilespec.to_dict()
+                # print(tilespec.to_dict())
             # for tile in mosaicdoc['Tiles']['Tile']:
-            #    print tile['UID'],tile['@row'],tile['@col'],tile['StageX'],tile['StageY']
+            #    print(tile['UID'],tile['@row'],tile['@col'],tile['StageX'],tile['StageY'])
             # df.to_csv(sitefile,index=False,header=False)
             tilespec_path = os.path.join(project_dir,'tilespecs')
 

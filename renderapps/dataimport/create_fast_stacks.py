@@ -2,7 +2,7 @@ import os
 import renderapi
 from renderapi.tilespec import TileSpec, Layout, MipMapLevel
 from renderapi.transform import AffineModel
-from create_mipmaps import create_mipmaps
+from .create_mipmaps import create_mipmaps
 my_env = os.environ.copy()
 from ..module.render_module import RenderModule, RenderParameters
 from argschema.fields import InputFile, InputDir, Str, Int, Boolean
@@ -43,7 +43,7 @@ def make_tilespec_from_statetable (df,rootdir,outputProject,outputOwner,outputSt
     mipmap_args = []
     tilespecpaths = []
     for ((ch,sess),chgroup) in df.groupby(['ch_name','session']):
-        print ch,sess
+        print(ch,sess)
 
         for ((rib,sect),group) in chgroup.groupby(['ribbon','section']):
             tilespeclist=[]
@@ -52,11 +52,11 @@ def make_tilespec_from_statetable (df,rootdir,outputProject,outputOwner,outputSt
                 filepath=row.full_path
                 fileparts=filepath.split(os.path.sep)[1:]
                 tilespecdir = rootdir + "/processed/downsamp_tilespec/"+fileparts[5]+"/"+fileparts[6]+"/"+fileparts[7]
-                #print tilespecdir
+                #print(tilespecdir)
                 if not os.path.isdir(tilespecdir):
                     os.makedirs(tilespecdir)
                 downdir = rootdir+"/processed/downsamp_images/"+fileparts[5]+"/"+fileparts[6]+"/"+fileparts[7]
-                #print "This is the Down Sampled Directory: %s"%downdir
+                #print("This is the Down Sampled Directory: %s"%downdir)
 
                 if not os.path.exists(downdir):
                     os.makedirs(downdir)
@@ -127,8 +127,8 @@ class CreateFastStack(RenderModule):
         statetablefile = self.args['statetableFile']
         rootdir = self.args['projectDirectory']
 
-        print "This is delete stack : "
-        print self.args['delete_stack']
+        print("This is delete stack : ")
+        print(self.args['delete_stack'])
         #exit(0)
         df = pd.read_csv(statetablefile)
         ribbons = df.groupby('ribbon')
@@ -164,6 +164,6 @@ class CreateFastStack(RenderModule):
 
 if __name__ == "__main__":
     #mod = CreateFastStack(schema_type = CreateFastStacksParameters)
-    #print example_input
+    #print(example_input)
     mod = CreateFastStack(input_data=example_input,schema_type=CreateFastStacksParameters)
     mod.run()
