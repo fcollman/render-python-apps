@@ -84,7 +84,7 @@ class StackTransfer(RenderTransfer):
             self.seen_urls.add(newurl)
 
         # Replace spaces with %20 -- may be needed for ImageJ url.open?
-        newurl.replace(" ", "%20")
+        newurl = newurl.replace(" ", "%20")
         return newurl
 
     def transform_ip(self, ip):
